@@ -1,0 +1,56 @@
+Phase 5C — Generic Laya Advisory Skill Integration Replay
+Status: PASS
+Replay cases: 24; adapter executions: 48/48
+Dataset SHA-256: 14c63f9c864a25db991a1c87fbdefeb8eef1ae7dd6ad6094ac824ef5aa37fcfe
+Frozen model SHA-256: 761ad958e6879c73cb6bf5ba9529b68aa8eb6a6eaf23eaa18f602a4e4ee38ff6
+Calibration SHA-256: cca0607acf2249caea4ad520830930be824099a8d8d79e507c35d4978d38481e
+Experimental policy SHA-256: 16fc7a19c2df48a48a6dd3fe367be8443a567f7561a84d9e90730f5cef7f0b06
+Model load count: 1; real requests: 40; uptime: 34.64s
+
+Gate results:
+- all_48_adapter_runs_accounted: PASS
+- normal_calls_succeeded: PASS
+- codex_claude_semantic_equivalence: PASS
+- experimental_status_cases_exercised: PASS
+- provenance_missing_zero: PASS
+- autonomy_authorization_true_zero: PASS
+- clear_misuse_zero: PASS
+- failure_decision_fabrication_zero: PASS
+- critical_failure_silent_continuation_zero: PASS
+- provenance_mismatch_fails_closed: PASS
+- repeated_model_reload_zero: PASS
+
+Case execution summary (no accuracy/generalization claim):
+- normal_01 [normal_advisory]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_02 [normal_advisory]: Codex/Claude calls=2, label=ready_now, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'ready_now'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- clear_05 [experimental_clear_safety]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=CLEAR, authorization=False, errors=[]
+- normal_04 [normal_advisory]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_05 [normal_advisory]: Codex/Claude calls=2, label=ready_now, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'ready_now'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- clear_06 [experimental_clear_safety]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=CLEAR, authorization=False, errors=[]
+- normal_07 [normal_advisory]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_08 [normal_advisory]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_09 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_10 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=CLEAR, authorization=False, errors=[]
+- normal_11 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_12 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- review_05 [review_required]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- clear_02 [experimental_clear_safety]: Codex/Claude calls=2, label=ready_now, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'ready_now'}], policy=CLEAR, authorization=False, errors=[]
+- review_06 [review_required]: Codex/Claude calls=2, label=ready_now, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'ready_now'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- clear_04 [experimental_clear_safety]: Codex/Claude calls=2, label=ready_now, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'ready_now'}], policy=CLEAR, authorization=False, errors=[]
+- review_01 [review_required]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_13 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=CLEAR, authorization=False, errors=[]
+- review_03 [review_required]: Codex/Claude calls=2, label=needs_local_setup, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'local_setup'}], policy=REVIEW_REQUIRED, authorization=False, errors=[]
+- normal_14 [normal_advisory]: Codex/Claude calls=2, label=needs_external_access, path=[{'stage': 'stage1', 'prediction': 'sufficient_information'}, {'stage': 'stage2', 'prediction': 'not_ready_now'}, {'stage': 'stage3', 'prediction': 'external_access'}], policy=CLEAR, authorization=False, errors=[]
+- failure_01 [failure_fail_closed]: Codex/Claude calls=2, label=None, path=None, policy=None, authorization=False, errors=['AdvisoryServiceUnavailable', 'AdvisoryServiceUnavailable']
+- failure_02 [failure_fail_closed]: Codex/Claude calls=2, label=None, path=None, policy=None, authorization=False, errors=['ValueError', 'ValueError']
+- failure_03 [failure_fail_closed]: Codex/Claude calls=2, label=None, path=None, policy=None, authorization=False, errors=['AdvisoryProtocolError', 'AdvisoryProtocolError']
+- failure_04 [failure_fail_closed]: Codex/Claude calls=2, label=None, path=None, policy=None, authorization=False, errors=['ValueError', 'ValueError']
+
+This replay validates integration behavior only. It does not estimate Laya accuracy or compare agent capability.
+
+Replay construction and attempt history
+- The 4 CLEAR and 4 REVIEW_REQUIRED entries are branch-coverage examples chosen from fresh states to exercise both frozen-policy outcomes. This is a purposive integration fixture set, not a representative sample or policy-performance evaluation.
+- An initial technical attempt stopped at the first fail-closed case after 40 successful service requests. The Windows subprocess pipe attempted UTF-8 decoding of legacy-codepage CLI error output. The failure logs are retained as `results/phase5C_replay_run_20260926_205952.stdout.log` and `.stderr.log`; CLI output was changed to ASCII-escaped JSON, with no model/policy change.
+- A complete 48-execution attempt on the first grouping failed only the requested CLEAR/REVIEW branch-coverage condition. Its dataset, results, and report are retained as `data/replay/phase5C_replay_cases_attempt1.jsonl` and `results/phase5C_replay_results_attempt1.json` / `phase5C_replay_report_attempt1.txt`.
+- Final replay used dataset SHA-256 shown above. Frozen thresholds remained unchanged. No model accuracy, agent reliability, or generalization claim is made.
+- Codex/Claudeの各Skill instructionが指定する同一common-client CLIをadapter名ごとに起動した決定論的replayであり、interactive LLM agent sessionの品質比較ではない。

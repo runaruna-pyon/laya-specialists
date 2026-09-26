@@ -2,16 +2,32 @@
 
 **Research Preview / Work in Progress**
 
-This is a research fork of [NandhaKishorM/laya](https://github.com/NandhaKishorM/laya) exploring specialist decision models built on Laya. This repository does not imply that a specialist model or runtime is complete.
+This public fork builds on [NandhaKishorM/laya](https://github.com/NandhaKishorM/laya), which is licensed under Apache-2.0. The upstream `LICENSE` is retained unchanged.
 
-**Current focus:** hierarchical runtime, calibration, selective human-escalation policy, and the Deep Learning Specialist.  
-**Future direction:** Audio DSP Specialist.
+## Generic Laya Advisory Skill v1 — complete
+
+Phase 5 is complete. The frozen hierarchical runtime, persistent local advisory service, shared client, and Codex/Claude Code Skills are published with selected Phase 5 records and the two small configuration files needed by the runtime. Phase 5C recorded 48/48 deterministic adapter replays and passed all 11 acceptance gates; this checks integration behavior, not model accuracy or comparative LLM ability.
+
+Laya is **advisory only** and is not a truth verifier. Its probabilities, entropy, and concentration describe the model's output distribution; **uncertainty is not a probability of correctness**. The Phase 5A concentration-based selective policy **failed its preregistered held-out gate** and is not an autonomous execution gate. A `CLEAR` result never authorizes execution; the service always returns `authorizes_autonomous_execution: false`.
+
+The next research stage is the **Phase 6 Deep Learning Specialist**. Its design, dataset generation, and training have not started.
+
+## Running the advisory runtime
+
+The service needs a local Python environment with compatible `laya`, NumPy, and PyTorch installations. The frozen model weights are not included; place the licensed model files under `models/hierarchical_pilot_v0e/`. The service checks the model SHA-256 (`761ad958e6879c73cb6bf5ba9529b68aa8eb6a6eaf23eaa18f602a4e4ee38ff6`) and will stop if it does not match. The calibration and experimental policy configuration files are included and their hashes are verified at startup.
+
+From the repository root on Windows, start and stop the persistent local service with:
+
+```powershell
+.\scripts\start_laya_advisory.ps1
+.\scripts\stop_laya_advisory.ps1
+```
+
+The Codex and Claude Code Skills call the shared client in `src/`. Runtime and advisory service/client unit tests are in `tests/` and can be run with `python -m pytest tests/test_laya_hierarchical_runtime.py tests/test_laya_advisory_service.py tests/test_laya_advisory_client.py`.
 
 ## Publication scope
 
-Potential public contributions include a finalized runtime, calibration configurations, policy and benchmark frameworks, and specialist code when ready. Keep raw experiment logs, in-progress datasets, diagnostic holdouts, personal environment paths, and settings that could reveal confidential information private or unpublished.
-
-The upstream README is retained below as reference material; its existing project details and results describe upstream work unless stated otherwise.
+Raw datasets, diagnostic and consumed holdout cases, raw prediction logs, large tuning outputs, and model weights remain unpublished. Selected reports and only the calibration/policy configurations needed by the frozen runtime are included. The upstream README follows as reference material; upstream project details and results describe upstream work unless stated otherwise.
 
 ---
 <p align="center">

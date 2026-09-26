@@ -1,0 +1,32 @@
+{
+  "model_sha256": "761ad958e6879c73cb6bf5ba9529b68aa8eb6a6eaf23eaa18f602a4e4ee38ff6",
+  "fit_dataset_sha256": "7c32250def5e6b6984346d5f0c9872c6dca2e9ed50806ddd34aa0d571f483406",
+  "eval_dataset_sha256": "cf4a5968d8d5c364d0a695f1d819d9c6c508afeb288ac2deb8544f9ea48652e4",
+  "temperature_by_options": {
+    "choice:2": 5.0,
+    "choice:3-5": 4.202408887068698
+  },
+  "temperature_buckets": {
+    "choice:2": [
+      "Stage1",
+      "Stage2"
+    ],
+    "choice:3-5": [
+      "Stage3"
+    ]
+  },
+  "base_temperature_fallback": 1.0,
+  "status": "frozen_after_preregistered_acceptance_rule",
+  "fitting_split": "FIT only",
+  "eval_used_only_for_acceptance": true,
+  "diagnostic_v2_used": false,
+  "diagnostic_v3_used": false,
+  "development_probes_used": false,
+  "uncertainty_semantics": {
+    "raw_probabilities": "T=1 model distribution",
+    "calibrated_probabilities": "temperature-scaled distribution",
+    "entropy": "distribution entropy",
+    "concentration": "1 - entropy / ln(K)",
+    "correctness_probability": "not estimated"
+  }
+}

@@ -73,3 +73,17 @@ site/
 # ruff's cache, and the JSON the research harnesses write on every run
 .ruff_cache/
 research/*_benchmark_results.json
+
+# Private research material and local frozen weights
+/data/
+/calibration/
+/finetune/
+/models/
+/results/*
+!/results/phase4_calibration_runtime_config.json
+!/results/phase5_policy_candidate_config.json
+!/results/phase5A_final_decision.md
+!/results/phase5_plan_amendment_after_5A.md
+!/results/phase5_final_summary.md
+!/results/phase5B_advisory_skill_report.txt
+!/results/phase5C_replay_report.txt

@@ -1,0 +1,92 @@
+{
+  "status": "frozen_from_tune",
+  "policy_family": "B",
+  "policy_name": "concentration",
+  "thresholds": {
+    "choice:2": 0.9,
+    "choice:3-5": 0.9
+  },
+  "signals": [
+    "concentration"
+  ],
+  "case_rule": "CLEAR iff every traversed stage satisfies this family's threshold(s); otherwise REVIEW_REQUIRED",
+  "tune_metrics": {
+    "N": 1200,
+    "correct": 1020,
+    "wrong_total": 180,
+    "CLEAR": 926,
+    "REVIEW": 274,
+    "correct_CLEAR": 837,
+    "wrong_CLEAR": 89,
+    "correct_REVIEW": 183,
+    "wrong_REVIEW": 91,
+    "overall_accuracy": 0.85,
+    "coverage": 0.7716666666666666,
+    "escalation_rate": 0.22833333333333333,
+    "selective_accuracy": 0.9038876889848813,
+    "autonomous_error_rate": 0.09611231101511879,
+    "false_autonomous_rate": 0.07416666666666667,
+    "error_capture_rate": 0.5055555555555555,
+    "unnecessary_escalation_rate": 0.17941176470588235,
+    "per_final_label": {
+      "ready_now": {
+        "total": 200,
+        "clear": 189,
+        "clear_coverage": 0.945,
+        "correct": 196,
+        "accuracy": 0.98
+      },
+      "needs_local_setup": {
+        "total": 200,
+        "clear": 124,
+        "clear_coverage": 0.62,
+        "correct": 138,
+        "accuracy": 0.69
+      },
+      "needs_external_access": {
+        "total": 200,
+        "clear": 172,
+        "clear_coverage": 0.86,
+        "correct": 158,
+        "accuracy": 0.79
+      },
+      "needs_other_environment": {
+        "total": 200,
+        "clear": 166,
+        "clear_coverage": 0.83,
+        "correct": 183,
+        "accuracy": 0.915
+      },
+      "blocked": {
+        "total": 200,
+        "clear": 101,
+        "clear_coverage": 0.505,
+        "correct": 146,
+        "accuracy": 0.73
+      },
+      "insufficient_information": {
+        "total": 200,
+        "clear": 174,
+        "clear_coverage": 0.87,
+        "correct": 199,
+        "accuracy": 0.995
+      }
+    }
+  },
+  "tune_gate_pass": false,
+  "tune_gate_candidate_exists": false,
+  "selection_rule_source": "results/phase5_preregistration.md#Phase-5A-追加freeze",
+  "execution_amendment": "results/phase5A_tune_execution_amendment.md",
+  "threshold_grid": {
+    "min": 0.0,
+    "max": 1.0,
+    "step": 0.05
+  },
+  "dataset_sha256": "4fc261f53dbe2643501e1517837bbd3f71cb7586c13bc9e46c05e6fd6aeba6db",
+  "model_sha256": "761ad958e6879c73cb6bf5ba9529b68aa8eb6a6eaf23eaa18f602a4e4ee38ff6",
+  "calibration_config_path": "results/phase4_calibration_runtime_config.json",
+  "calibration_config_sha256": "cca0607acf2249caea4ad520830930be824099a8d8d79e507c35d4978d38481e",
+  "evaluation_sha256_hash_only": "3c6f1ede335ef20668f4055e8cf123423230182b83bf7526a01066cabcd861df",
+  "evaluation_inference_count": 0,
+  "metrics_definition": "results/phase5_preregistration.md#Denominatorを固定した指標"
+}

@@ -1,0 +1,70 @@
+Phase 5B — Generic Laya Advisory Skill Infrastructure
+Status: PHASE 5B COMPLETE
+
+Scope
+- Persistent advisory service and common client implemented.
+- Codex and Claude Code thin Skill adapters added.
+- Phase 5C replay benchmark and Phase 6 specialist work were not started.
+- Frozen runtime, model weights, calibration, taxonomy, routing, and policy were not modified.
+
+Frozen provenance verified
+- Model SHA-256: 761ad958e6879c73cb6bf5ba9529b68aa8eb6a6eaf23eaa18f602a4e4ee38ff6
+- Calibration SHA-256: cca0607acf2249caea4ad520830930be824099a8d8d79e507c35d4978d38481e
+- Experimental failed-gate policy SHA-256: 16fc7a19c2df48a48a6dd3fe367be8443a567f7561a84d9e90730f5cef7f0b06
+- Service startup verifies these files before listening. Frozen Laya runtime is initialized once per process and reused; shared model inference is serialized.
+
+Runtime contract
+- HTTP service binds only to 127.0.0.1. Endpoints: GET /health, GET /metadata, POST /decide, and token-protected POST /shutdown.
+- The Python client rejects non-loopback URLs, checks frozen provenance, validates schema, and fails closed on unavailable service, malformed response, or missing false-autonomy guard.
+- A request may contain state and optional task. When task is supplied it is included with the state in the runtime evidence object; it is not silently discarded.
+- Raw and calibrated stage distributions are passed through. Entropy, normalized entropy, concentration, top probabilities, and margin are distribution properties and are not correctness probabilities.
+- Experimental policy result may be CLEAR or REVIEW_REQUIRED, but autonomy_policy.authorizes_autonomous_execution is always false. The Codex and Claude instructions state that CLEAR is not execution authorization and Laya is advisory, not a truth verifier.
+- Invalid JSON, invalid schema, unavailable inference, and provenance failures return explicit errors. No fabricated decision or silent continuation is used.
+
+Adapters and lifecycle
+- Codex Skill: .agents/skills/laya-advisory/SKILL.md
+- Claude Code Skill: .claude/skills/laya-advisory/SKILL.md
+- Both adapters invoke the same src/laya_advisory_client.py contract; no decision logic is copied into either adapter.
+- scripts/start_laya_advisory.ps1 and scripts/stop_laya_advisory.ps1 were exercised on Windows PowerShell. Startup health verified the model SHA; token-authenticated graceful shutdown completed and the PID record matched /health.
+- Both Skill files passed the Codex skill-creator quick_validate.py validator.
+
+Verification
+- Full test discovery: 85 tests, 0 failures (28.018 seconds; final verification run).
+- Python compile check: service, client, and runtime verification helper compiled successfully.
+- Phase 4 E2E regression: 72/72 cases matched the direct frozen runtime and saved Phase 4A raw record on final label, hierarchical path, and per-stage raw/calibrated argmax. Final label, path, stage prediction, and saved Phase 4 record mismatch counts: 0.
+- Service/client state roundtrip, Stage1 stop, Stage2 stop, Stage3 route, authorization guard, frozen provenance, malformed JSON/schema, loopback binding, unavailable-service behavior, and single-runtime reuse are covered by tests.
+- Real persistent service lifecycle: start, health, and graceful stop passed.
+
+Warm latency (CUDA; 24 repetitions per route; milliseconds)
+Route depth 1 / Stage1: direct median 31.78, p95 33.28; persistent HTTP median 35.41, p95 37.76; median HTTP overhead 3.63.
+Route depth 2 / Stage1→Stage2: direct median 65.53, p95 70.39; persistent HTTP median 69.18, p95 72.77; median HTTP overhead 3.65.
+Route depth 3 / Stage1→Stage2→Stage3: direct median 93.82, p95 104.07; persistent HTTP median 98.95, p95 102.95; median HTTP overhead 5.14.
+Cold model load: 10.89 seconds, paid once when the service starts, not on each request.
+
+Artifacts
+- src/laya_advisory_service.py
+- src/laya_advisory_client.py
+- scripts/start_laya_advisory.ps1
+- scripts/stop_laya_advisory.ps1
+- scripts/verify_phase5b_runtime.py
+- tests/test_laya_advisory_service.py
+- tests/test_laya_advisory_client.py
+- results/phase5B_advisory_smoke_test.json
+- results/phase5B_advisory_latency.json
+- results/phase5B_advisory_skill_report.txt
+
+Acceptance assessment
+- Persistent loopback service: PASS
+- Frozen model/calibration/policy provenance checks: PASS
+- Shared process/model reuse: PASS
+- Direct runtime and saved Phase 4 E2E regression match: PASS
+- Stable advisory schema and uncertainty semantics: PASS
+- Failed policy cannot authorize autonomy: PASS
+- Critical errors fail closed: PASS
+- Common client and JSON CLI: PASS
+- Codex adapter: PASS
+- Claude Code adapter: PASS
+- Tests and warm latency measurement: PASS
+
+PHASE 5B COMPLETE
+READY FOR PHASE 5C
