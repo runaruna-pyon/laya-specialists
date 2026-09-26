@@ -1,3 +1,19 @@
+# laya-specialists
+
+**Research Preview / Work in Progress**
+
+This is a research fork of [NandhaKishorM/laya](https://github.com/NandhaKishorM/laya) exploring specialist decision models built on Laya. This repository does not imply that a specialist model or runtime is complete.
+
+**Current focus:** hierarchical runtime, calibration, selective human-escalation policy, and the Deep Learning Specialist.  
+**Future direction:** Audio DSP Specialist.
+
+## Publication scope
+
+Potential public contributions include a finalized runtime, calibration configurations, policy and benchmark frameworks, and specialist code when ready. Keep raw experiment logs, in-progress datasets, diagnostic holdouts, personal environment paths, and settings that could reveal confidential information private or unpublished.
+
+The upstream README is retained below as reference material; its existing project details and results describe upstream work unless stated otherwise.
+
+---
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/NandhaKishorM/laya/main/assets/logo-lockup-dark.png" />
