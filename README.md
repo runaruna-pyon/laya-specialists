@@ -100,7 +100,7 @@ For Phase 7E, the same semantic request sent with Luna, Astra, Sol, and Codex `s
 
 ## Licensing and upstream attribution
 
-This repository is a fork of [NandhaKishorM/laya](https://github.com/NandhaKishorM/laya). The existing root [`LICENSE`](LICENSE) is Apache-2.0 and is retained unchanged for upstream-derived content. Original C1 specialist additions in this research-preview contribution are offered under the MIT terms in [`LICENSE-MIT`](LICENSE-MIT). These licenses have different scopes; the MIT file does not relicense upstream files. No separate upstream `NOTICE` file was present in the fork at this checkpoint.
+This repository and its C1 research-preview additions are distributed under Apache-2.0, as stated in the root [`LICENSE`](LICENSE). The fork retains the upstream Apache-2.0 license and attribution for upstream-derived content. No separate upstream `NOTICE` file was present at this checkpoint.
 
 ## Author and contact
 
