@@ -87,3 +87,10 @@ research/*_benchmark_results.json
 !/results/phase5_final_summary.md
 !/results/phase5B_advisory_skill_report.txt
 !/results/phase5C_replay_report.txt
+
+# Laya C1 local configuration, runtime state, and unshipped model artifacts
+/config/laya_local.toml
+/.laya-local/
+/models/phase6_specialist/
+*.safetensors
+/results/phase7*

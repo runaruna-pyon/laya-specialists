@@ -1,0 +1,9 @@
+# Local-only settings. Copy this file to config/laya_local.toml and edit locally.
+# Do not commit config/laya_local.toml; it may contain private paths.
+[vault]
+root = "path/to/your/Obsidian_Vault_WaveNeXt"
+
+[specialist]
+endpoint = "http://127.0.0.1:8766"
+# Repository-relative path to a separately supplied, matching C1 checkpoint.
+checkpoint_path = "models/phase6_specialist/c1/best/model.safetensors"

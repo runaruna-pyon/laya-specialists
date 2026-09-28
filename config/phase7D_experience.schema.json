@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "laya-experience-record-v2",
+  "title": "Laya Experience Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experience_id", "timestamp", "project", "problem_context", "llm_proposal",
+    "laya_prediction", "human_decision", "experiment", "resolution", "source_provenance",
+    "derived_inference_contract", "training_candidate", "source_agent"
+  ],
+  "properties": {
+    "record_kind": {"enum": ["experience", "system_test"]},
+    "experience_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "project": {"type": "string", "minLength": 1},
+    "source_agent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "model", "interface"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1, "maxLength": 256},
+        "model": {"type": "string", "minLength": 1, "maxLength": 256},
+        "interface": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "proposal_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "laya_request_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "problem_context": {"type": "object"},
+    "llm_proposal": {"type": "object"},
+    "laya_prediction": {
+      "type": "object",
+      "required": ["primary", "probabilities", "flags", "uncertainty", "model_version", "checkpoint_sha256"],
+      "properties": {
+        "primary": {"enum": ["insufficient_evidence", "ready_to_implement", "verification_required", "high_regression_risk"]},
+        "probabilities": {"$ref": "#/$defs/primaryProbabilities"},
+        "flags": {"$ref": "#/$defs/flags"},
+        "uncertainty": {"type": "object"},
+        "model_version": {"type": "string", "minLength": 1},
+        "checkpoint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": true
+    },
+    "human_decision": {
+      "type": "object",
+      "properties": {
+        "decision": {"type": "string"},
+        "notes": {"type": "string"},
+        "resolved_by_human": {"type": "boolean"},
+        "independently_confirmed": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "experiment": {
+      "type": "object",
+      "required": ["action", "measurements", "observations"],
+      "properties": {
+        "action": {"type": "string"},
+        "measurements": {"type": "array", "items": {"type": "object"}},
+        "observations": {"type": "array"}
+      },
+      "additionalProperties": true
+    },
+    "resolution": {
+      "type": "object",
+      "required": ["status", "supported_claims", "rejected_claims", "resolved_primary", "resolved_flags"],
+      "properties": {
+        "status": {"enum": ["unresolved", "resolved", "rejected"]},
+        "supported_claims": {"type": "array"},
+        "rejected_claims": {"type": "array"},
+        "resolved_primary": {"enum": ["insufficient_evidence", "ready_to_implement", "verification_required", "high_regression_risk", null]},
+        "resolved_flags": {"type": "array", "items": {"enum": ["needs_measurement", "needs_ablation", "needs_reference_check", "needs_baseline_or_replication", "needs_train_inference_parity_check", "needs_leakage_or_distribution_check", "needs_latency_accounting", "needs_implementation_spec", "needs_regression_plan", "needs_sample_breadth"]}}
+      },
+      "additionalProperties": true
+    },
+    "source_provenance": {"type": "array", "items": {"type": "object"}},
+    "derived_inference_contract": {"type": ["object", "null"]},
+    "training_candidate": {
+      "type": "object",
+      "required": ["eligible", "reason"],
+      "properties": {"eligible": {"type": "boolean"}, "reason": {"type": "string", "minLength": 1}},
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "primaryProbabilities": {
+      "type": "object", "additionalProperties": false,
+      "required": ["insufficient_evidence", "ready_to_implement", "verification_required", "high_regression_risk"],
+      "properties": {
+        "insufficient_evidence": {"$ref": "#/$defs/probability"},
+        "ready_to_implement": {"$ref": "#/$defs/probability"},
+        "verification_required": {"$ref": "#/$defs/probability"},
+        "high_regression_risk": {"$ref": "#/$defs/probability"}
+      }
+    },
+    "flags": {
+      "type": "object", "additionalProperties": false,
+      "required": ["needs_measurement", "needs_ablation", "needs_reference_check", "needs_baseline_or_replication", "needs_train_inference_parity_check", "needs_leakage_or_distribution_check", "needs_latency_accounting", "needs_implementation_spec", "needs_regression_plan", "needs_sample_breadth"],
+      "properties": {
+        "needs_measurement": {"$ref": "#/$defs/flag"},
+        "needs_ablation": {"$ref": "#/$defs/flag"},
+        "needs_reference_check": {"$ref": "#/$defs/flag"},
+        "needs_baseline_or_replication": {"$ref": "#/$defs/flag"},
+        "needs_train_inference_parity_check": {"$ref": "#/$defs/flag"},
+        "needs_leakage_or_distribution_check": {"$ref": "#/$defs/flag"},
+        "needs_latency_accounting": {"$ref": "#/$defs/flag"},
+        "needs_implementation_spec": {"$ref": "#/$defs/flag"},
+        "needs_regression_plan": {"$ref": "#/$defs/flag"},
+        "needs_sample_breadth": {"$ref": "#/$defs/flag"}
+      }
+    },
+    "flag": {
+      "type": "object", "required": ["probability", "active"],
+      "properties": {"probability": {"$ref": "#/$defs/probability"}, "active": {"type": "boolean"}},
+      "additionalProperties": true
+    }
+  }
+}

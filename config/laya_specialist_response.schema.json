@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "laya-specialist-common-response-v1",
+  "title": "Laya model-agnostic specialist advisory response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "source_agent", "project", "specialist", "primary", "flags", "uncertainty", "advisory", "authorizes_autonomous_execution"],
+  "properties": {
+    "schema_version": {"const": "laya-specialist-common-response-v1"},
+    "request_id": {"type": "string", "minLength": 1},
+    "source_agent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "model", "interface"],
+      "properties": {"provider": {"type": "string"}, "model": {"type": "string"}, "interface": {"type": "string"}}
+    },
+    "project": {"type": "string"},
+    "specialist": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "model_version", "checkpoint_sha"],
+      "properties": {
+        "name": {"const": "Laya Deep Learning Specialist"},
+        "model_version": {"type": "string"},
+        "checkpoint_sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "primary": {"type": "object", "required": ["label", "probabilities"], "properties": {"label": {"type": "string"}, "logits": {"type": "object"}, "probabilities": {"type": "object"}}},
+    "flags": {"type": "object"},
+    "uncertainty": {"type": "object", "required": ["top1_probability", "top2_probability", "margin", "entropy", "concentration", "calibrated", "semantics"], "properties": {"top1_probability": {"type": "number"}, "top2_probability": {"type": "number"}, "margin": {"type": "number"}, "entropy": {"type": "number"}, "normalized_entropy": {"type": "number"}, "concentration": {"type": "number"}, "calibrated": {"const": false}, "semantics": {"type": "string"}}},
+    "advisory": {"type": "object", "required": ["action_class", "human_summary", "suggested_next_check"], "properties": {"action_class": {"type": "string"}, "human_summary": {"type": "string"}, "suggested_next_check": {"type": ["string", "null"]}}},
+    "authorizes_autonomous_execution": {"const": false}
+  }
+}
